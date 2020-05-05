@@ -1,0 +1,32 @@
+<mat-card style="width: 50%; margin: auto; margin-top: 20px">
+  <h3 style="text-align: center">{{data.type}} Task</h3>
+  <form [formGroup]="taskForm" style="width: 80%; margin: auto; margin-top: 20px">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input formControlName="title" id="title" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label><br>
+      <textarea formControlName="description" id="description" cols="30" rows="10"></textarea>
+    </div>
+    <div class="form-group" *ngIf="data.type == 'TimeTask'">
+      <label for="startDate">start Date</label>
+      <input formControlName="startDate" type="date" id="startDate">
+    </div>
+    <div class="form-group" *ngIf="data.type == 'TimeTask'">
+      <label for="endDate">End Date</label>
+      <input formControlName="endDate" type="date" id="endDate">
+    </div>
+    <div class="form-group" *ngIf="data.type == 'SeverityTask'">
+      <label for="severity">Severity</label>
+      <select formControlName="severity" class="form-control" id="severity">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="High">Red</option>
+      </select>
+    </div>
+    <button style="margin-right: 20px" class="btn btn-primary" (click)="edit(taskForm.value)">Edit</button>
+    <button class="btn btn-danger" (click)="delete(taskForm.value)">Delete Task</button>
+  </form>
+</mat-card>
