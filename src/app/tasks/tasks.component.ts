@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
-import {Task} from '../models/task';
-import {EditTaskComponent} from '../edit-task/edit-task.component';
-import {DataService} from '../data.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
+import { Task } from '../models/task';
+import { EditTaskComponent } from '../edit-task/edit-task.component';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-tasks',
@@ -24,14 +24,15 @@ export class TasksComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
-  openModal(row){
+  openModal(row) {
     const dialogRef = this.dialog.open(EditTaskComponent, {
       width: '50%',
-      data: row
+      data: row,
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.ngOnInit();
     });
   }
 

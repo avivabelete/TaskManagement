@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Task} from '../models/task';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DataService} from '../data.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Task } from '../models/task';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -13,25 +13,28 @@ export class EditTaskComponent implements OnInit {
 
   // newTask: Task = null;
   taskForm: FormGroup;
+  _id = '';
   title = '';
   description = '';
   startDate: Date = new Date();
   endDate: Date = new Date();
   severity = '';
+  type = '';
 
-  constructor(private  fb: FormBuilder, private _data: DataService, public dialogRef: MatDialogRef<EditTaskComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+  constructor(private fb: FormBuilder, private _data: DataService, public dialogRef: MatDialogRef<EditTaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data) {
     this.taskForm = fb.group({
+      _id: [data._id],
       title: [data.title, Validators.required],
-      description : [data.description, Validators.required],
+      description: [data.description, Validators.required],
       startDate: [data.startDate],
       endDate: [data.endDate],
       severity: [data.severity],
       type: [data.type]
-    }, {validator: this.dateLessThan('startDate' , 'endDate')});
+    }, { validator: this.dateLessThan('startDate', 'endDate') });
   }
   dateLessThan(from: string, to: string) {
-    return (group: FormGroup): {[key: string]: any} => {
+    return (group: FormGroup): { [key: string]: any } => {
       let f = group.controls[from];
       let t = group.controls[to];
       if (f.value > t.value) {
@@ -43,10 +46,10 @@ export class EditTaskComponent implements OnInit {
     };
   }
   edit(task) {
-    this._data.updateTask(task);
+    this._data.updateTask(task).subscribe(task => { console.log(task) }, error => console.error(error));
   }
   delete(task) {
-    this._data.deleteTask(task);
+    this._data.deleteTask(task).subscribe(task => { console.log(task) }, error => console.error(error));
   }
   ngOnInit() {
   }

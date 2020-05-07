@@ -5,5 +5,5 @@ export class Task {
   startDate?: Date;
   endDate?: Date;
   severity?: string;
-
+  type?: string;
 }

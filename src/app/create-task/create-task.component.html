@@ -1,51 +1,49 @@
-
 <mat-card style="width: 50%; margin: auto; margin-top: 20px">
   <h3 style="text-align: center"> Create new Task</h3>
-<form [formGroup]="taskForm" (ngSubmit)="submit(taskForm.value)" style="width: 80%; margin: auto" >
-  <div class="form-group">
-    <div class="form-check">
-      <input formControlName="type"  type="radio" name="type" id="timeTask" value="TimeTask" >
-      <label class="form-check-label" for="timeTask">Time Task</label>
+  <form [formGroup]="taskForm" (ngSubmit)="submit(taskForm.value)" style="width: 80%; margin: auto">
+    <div class="form-group">
+      <div class="form-check">
+        <input formControlName="type" type="radio" name="type" id="timeTask" value="TimeTask">
+        <label class="form-check-label" for="timeTask">Time Task</label>
+      </div>
+      <div class="form-check">
+        <input formControlName="type" type="radio" name="type" id="severityTask" value="SeverityTask">
+        <label class="form-check-label" for="severityTask">Severity Task</label>
+      </div>
     </div>
-    <div class="form-check">
-      <input formControlName="type"  type="radio" name="type" id="severityTask" value="SeverityTask" >
-      <label class="form-check-label" for="severityTask">Severity Task</label>
+    <div style="width: 50%" class="form-group">
+      <label for="title">Title</label>
+      <input formControlName="title" id="title" type="text" class="form-control">
+      <div class="alert alert-danger" *ngIf="taskForm.controls['title'].touched && !taskForm.controls['title'].valid">Title is required.</div>
     </div>
-  </div>
-  <div style="width: 50%" class="form-group">
-    <label for="title">Title</label>
-    <input formControlName="title" id="title" type="text" class="form-control">
-    <div class="alert alert-danger" *ngIf="taskForm.controls['title'].touched && !taskForm.controls['title'].valid">Title is required.</div>
-  </div>
 
-  <div class="form-group" *ngIf="taskForm.controls['type'].value == 'TimeTask'">
-    <label for="startDate">start Date</label>
-    <input formControlName="startDate" type="date" id="startDate">
-  </div>
-  <div class="form-group" *ngIf="taskForm.controls['type'].value == 'TimeTask'">
-    <label for="endDate">End Date</label>
-    <input formControlName="endDate" type="date" id="endDate">
-  </div>
-  <div class="alert alert-danger"
-            *ngIf="taskForm.errors">{{ taskForm.errors?.dates }}</div>
-  <div style="width: 50%" class="form-group" *ngIf="taskForm.controls['type'].value == 'SeverityTask'">
-    <label for="severity">Severity</label>
-    <select formControlName="severity" class="form-control" id="severity">
-      <option value="Low">Low</option>
-      <option value="Medium">Medium</option>
-      <option value="High">High</option>
-      <option value="High">Red</option>
-    </select>
-<!--    <div class="alert alert-danger"-->
-<!--         *ngIf="taskForm.controls['severity'].touched && !taskForm.controls['severity'].valid">Severity is required.</div>-->
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label><br>
-    <textarea formControlName="description" id="description" cols="30" rows="10"></textarea>
-    <div class="alert alert-danger"
-         *ngIf="taskForm.controls['description'].touched && !taskForm.controls['description'].valid">Description is required.</div>
-  </div>
-  <button class="btn btn-primary" [disabled]="!taskForm.valid">Submit</button>
-</form>
+    <div class="form-group" *ngIf="taskForm.controls['type'].value == 'TimeTask'">
+      <label for="startDate">start Date</label>
+      <input formControlName="startDate" type="date" id="startDate">
+    </div>
+    <div class="form-group" *ngIf="taskForm.controls['type'].value == 'TimeTask'">
+      <label for="endDate">End Date</label>
+      <input formControlName="endDate" type="date" id="endDate">
+    </div>
+    <div class="alert alert-danger" *ngIf="taskForm.errors">{{ taskForm.errors?.dates }}</div>
+    <div style="width: 50%" class="form-group" *ngIf="taskForm.controls['type'].value == 'SeverityTask'">
+      <label for="severity">Severity</label>
+      <select formControlName="severity" class="form-control" id="severity">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="High">Red</option>
+      </select>
+      <!--    <div class="alert alert-danger"-->
+      <!--         *ngIf="taskForm.controls['severity'].touched && !taskForm.controls['severity'].valid">Severity is required.</div>-->
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <br>
+      <textarea formControlName="description" id="description" cols="30" rows="10"></textarea>
+      <div class="alert alert-danger" *ngIf="taskForm.controls['description'].touched && !taskForm.controls['description'].valid">Description is required.</div>
+    </div>
+    <button class="btn btn-primary" [disabled]="!taskForm.valid">Submit</button>
+  </form>
+  <div class="alert alert-success" *ngIf="addedSuccesfuly">New Task Added: {{addedTask}}</div>
 </mat-card>
-

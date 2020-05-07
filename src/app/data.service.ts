@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Task} from './models/task';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Task } from './models/task';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,9 @@ export class DataService {
     return this.http.post(this.url + '/api/Tasks', task);
   }
   updateTask(task: Task) {
-     this.http.put(this.url + '/api/Tasks/' + task._id, task);
+    return this.http.put(this.url + '/api/Tasks/' + task._id, task);
   }
   deleteTask(task: Task) {
-    this.http.delete(this.url + '/api/Tasks/' + task._id);
+    return this.http.delete(this.url + '/api/Tasks/' + task._id);
   }
 }
