@@ -29,5 +29,8 @@
     </div>
     <button style="margin-right: 20px" class="btn btn-primary" (click)="edit(taskForm.value)">Edit</button>
     <button class="btn btn-danger" (click)="delete(taskForm.value)">Delete Task</button>
+    <div class="alert alert-success" *ngIf="successfulyEdited">Successfuly edited</div>
+    <div class="alert alert-success" *ngIf="successfulyDeleted">Successfuly deleted</div>
+
   </form>
 </mat-card>

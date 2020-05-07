@@ -11,7 +11,8 @@ import { DataService } from '../data.service';
 })
 export class EditTaskComponent implements OnInit {
 
-  // newTask: Task = null;
+  successfulyDeleted = false;
+  successfulyEdited = false;
   taskForm: FormGroup;
   _id = '';
   title = '';
@@ -46,10 +47,16 @@ export class EditTaskComponent implements OnInit {
     };
   }
   edit(task) {
-    this._data.updateTask(task).subscribe(task => { console.log(task) }, error => console.error(error));
+    this._data.updateTask(task).subscribe(task => {
+      console.log(task);
+      this.successfulyEdited = true;
+    }, error => console.error(error));
   }
   delete(task) {
-    this._data.deleteTask(task).subscribe(task => { console.log(task) }, error => console.error(error));
+    this._data.deleteTask(task).subscribe(task => {
+      console.log(task)
+      this.successfulyDeleted = true;
+    }, error => console.error(error));
   }
   ngOnInit() {
   }

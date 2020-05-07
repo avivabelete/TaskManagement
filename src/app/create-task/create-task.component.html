@@ -25,7 +25,6 @@
       <label for="endDate">End Date</label>
       <input formControlName="endDate" type="date" id="endDate">
     </div>
-    <div class="alert alert-danger" *ngIf="taskForm.errors">{{ taskForm.errors?.dates }}</div>
     <div style="width: 50%" class="form-group" *ngIf="taskForm.controls['type'].value == 'SeverityTask'">
       <label for="severity">Severity</label>
       <select formControlName="severity" class="form-control" id="severity">
@@ -34,9 +33,9 @@
         <option value="High">High</option>
         <option value="High">Red</option>
       </select>
-      <!--    <div class="alert alert-danger"-->
-      <!--         *ngIf="taskForm.controls['severity'].touched && !taskForm.controls['severity'].valid">Severity is required.</div>-->
     </div>
+    <div class="alert alert-danger" *ngIf="taskForm.errors && taskForm.controls['type'].value == 'TimeTask'">{{ taskForm.errors?.err }}</div>
+    <div class="alert alert-danger" *ngIf="taskForm.errors && taskForm.controls['severity'].touched">{{ taskForm.errors?.severity }}</div>
     <div class="form-group">
       <label for="description">Description</label>
       <br>

@@ -30,14 +30,18 @@ export class CreateTaskComponent implements OnInit {
       endDate: [null],
       severity: [null], // Validators.required(this.type === 'SeverityTask')],
       type: ['TimeTask']
-    }, { validator: this.dateLessThan('startDate', 'endDate') });
+    }, { validator: this.dateLessThan('startDate', 'endDate', 'severity', 'type') });
   }
-  dateLessThan(from: string, to: string) {
+  dateLessThan(from: string, to: string, severity: string, type: string) {
     return (group: FormGroup): { [key: string]: any } => {
       if (group.controls[from].value > group.controls[to].value) {
         return {
-          dates: 'Date from should be less than Date to'
+          err: 'Date `start` should be less than Date `end`'
         };
+      } else if (group.controls[type].value == 'SeverityTask' && group.controls[severity].value == null) {
+        return {
+          severity: 'Severity is required'
+        }
       }
       return {};
     };
